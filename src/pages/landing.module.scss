@@ -1,0 +1,32 @@
+.Landing {
+  position: relative;
+  &_background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    background-color: #52098b;
+    overflow: hidden;
+    background-position: center 0;
+    object-fit: cover;
+  }
+
+  &_elipse {
+    position: absolute;
+    left: 0;
+    bottom: 28px;
+    height: 60%;
+  }
+
+  &_gold {
+    position: absolute;
+    bottom: 0;
+    left: 35%;
+  }
+
+  &_gold2 {
+    position: absolute;
+    top: 10px;
+    right: 15%;
+  }
+}

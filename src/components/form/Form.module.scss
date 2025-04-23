@@ -1,0 +1,199 @@
+.form__container {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  margin-top: 0;
+}
+
+.form__main {
+  color: #bbc6f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  box-sizing: border-box;
+  border-radius: 0;
+  background-color: #000000b3;
+  backdrop-filter: blur(5px);
+}
+
+.form__title {
+  margin-top: 0;
+  margin-bottom: 22px;
+  color: #fff;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 500;
+}
+
+.form__input_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.form__input_item {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  font-size: 13px;
+}
+
+.form__input_item input {
+  padding: 11px 14px;
+  background-color: #f1f3f6;
+  border: 1px solid #e8eaf0;
+  border-radius: 6px;
+}
+
+.form__input_item input:hover,
+.form__input_item input:focus-visible {
+  border-color: #5ab828;
+  outline: none;
+}
+
+.form__input_item_error input {
+  border-color: #f91717;
+}
+
+.form__error_message[class] {
+  margin-top: 4px;
+  color: #f91717;
+}
+
+.form__checkbox_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.form__checkbox_item {
+  font-size: 11px;
+}
+
+.form__checkbox_item p {
+  margin: 0;
+}
+
+.form__checkbox_item a {
+  color: inherit;
+  transition: all 0.5s;
+}
+
+.form__checkbox_item a:hover {
+  text-decoration: none;
+}
+
+.form__checkbox_item input {
+  display: none;
+}
+
+.form__checkbox_item label {
+  position: relative;
+  display: block;
+  padding-left: 26px;
+}
+
+.form__checkbox_item label::before,
+.form__checkbox_item label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: calc(50% - 9px);
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+.form__checkbox_item label::before {
+  background-color: #f1f3f6;
+  border: 1px solid #e8eaf0;
+}
+
+.form__checkbox_item input:checked ~ label::before {
+  background-color: #5ab828;
+  border-color: #5ab828;
+}
+
+.form__checkbox_item input:checked ~ label::after {
+  background-image: url(../../assets/check.png);
+  background-position: 4.5px 6px;
+  background-repeat: no-repeat;
+}
+
+.form__button {
+  width: 100%;
+  padding: 15px;
+  font-size: 13px;
+  color: #ffffff;
+  text-transform: uppercase;
+  background-color: #5ab828;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.form__button:hover {
+  background-color: #4bd700;
+  box-shadow: 0 0 15px 0 #4bd70080;
+}
+
+.form__button:active {
+  background-color: #4da41e;
+}
+
+.form__password_field {
+  position: relative;
+}
+
+.form__password_field input {
+  width: 100%;
+  padding-right: 38px;
+  box-sizing: border-box;
+}
+
+.form__password_field button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  width: 38px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.form__phone_input {
+  background-color: #f1f3f6;
+  border: 1px solid #e8eaf0;
+  border-radius: 6px;
+}
+
+.form__phone_input > div {
+  padding: 9px 13px;
+  margin: 0;
+  background-color: #ffffff;
+  border-radius: 6px;
+}
+
+.form__phone_input > div select ~ div {
+  box-shadow: none;
+}
+
+.form__phone_input > div > div:last-child {
+  display: none;
+}
+
+.form__phone_input input {
+  padding: 11px 14px;
+  border: none;
+}
