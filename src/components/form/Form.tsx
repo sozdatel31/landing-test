@@ -1,53 +1,91 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, createContext, useContext, useState, ReactNode } from 'react';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 import { Phone } from './Phone';
 import { Password } from './Password';
 import styles from './Form.module.scss';
 import gold2 from '../../assets/gold-2.png';
+
 interface FormValues {
   phone: string | undefined;
   password: string;
   privacyPolicy: boolean;
   agree: boolean;
 }
-const INIT_VALUES = {
+
+interface FormContextType {
+  values: FormValues;
+  errors: Record<keyof FormValues, string>;
+  handleInput: (
+    name: keyof FormValues
+  ) => (e: ChangeEvent<HTMLInputElement> | string | undefined) => void;
+  handleCheckbox: (name: keyof FormValues) => (e: ChangeEvent<HTMLInputElement>) => void;
+  resetForm: () => void;
+  setErrors: React.Dispatch<React.SetStateAction<Record<keyof FormValues, string>>>;
+}
+
+const INIT_VALUES: FormValues = {
   phone: '',
   password: '',
   privacyPolicy: false,
   agree: false,
 };
-const INIT_ERRORS = {
+
+const INIT_ERRORS: Record<keyof FormValues, string> = {
   phone: '',
   password: '',
   privacyPolicy: '',
   agree: '',
 };
+
+const FormContext = createContext<FormContextType | undefined>(undefined);
+
 const MIN_PASSWORD_LENGTH = 6;
 
-const Form = () => {
-  const [values, setValues] = React.useState(INIT_VALUES);
-  const [errors, setErrors] = React.useState(INIT_ERRORS);
+export const useFormContext = () => {
+  const context = useContext(FormContext);
+  if (!context) throw new Error('useFormContext must be used within FormProvider');
+  return context;
+};
+
+const FormProvider = ({ children }: { children: ReactNode }) => {
+  const [values, setValues] = useState(INIT_VALUES);
+  const [errors, setErrors] = useState(INIT_ERRORS);
 
   const handleInput =
     (name: keyof FormValues) => (e: ChangeEvent<HTMLInputElement> | string | undefined) => {
       if (name === 'phone') {
-        // Если поле - это телефон, приводим значение к string (или оставляем undefined)
         setValues((prev) => ({
           ...prev,
           [name]: e as string,
         }));
       } else {
-        // Для остальных полей (например, password) получаем значение как string
         setValues((prev) => ({
           ...prev,
-          [name]: e && typeof e === 'object' ? e.target.value : e,
+          [name]: typeof e === 'object' ? e.target.value : (e ?? ''),
         }));
       }
     };
 
-  const handleCheckbox = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckbox = (name: keyof FormValues) => (e: ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({ ...prev, [name]: e.target.checked }));
   };
+
+  const resetForm = () => {
+    setValues(INIT_VALUES);
+    setErrors(INIT_ERRORS);
+  };
+
+  return (
+    <FormContext.Provider
+      value={{ values, errors, handleInput, handleCheckbox, resetForm, setErrors }}
+    >
+      {children}
+    </FormContext.Provider>
+  );
+};
+
+const Form = () => {
+  const { values, errors, handleInput, handleCheckbox, setErrors, resetForm } = useFormContext();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,8 +113,7 @@ const Form = () => {
     if (Object.values(newErrors).some((error) => !!error)) {
       setErrors(newErrors);
     } else {
-      setValues(INIT_VALUES);
-      setErrors(INIT_ERRORS);
+      resetForm();
       alert('Спасибо');
     }
   };
@@ -145,4 +182,8 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default () => (
+  <FormProvider>
+    <Form />
+  </FormProvider>
+);
