@@ -1,10 +1,33 @@
+@use '../../styles/mixins';
+
 .form__container {
   position: fixed;
-  right: 0;
-  top: 0;
   bottom: 0;
-  width: 30%;
+  width: 100%;
   margin-top: 0;
+
+  @include mixins.respond-tablet {
+    right: 0;
+    top: 0;
+    width: 30%;
+    margin-top: 0;
+  }
+}
+
+.gold2 {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  height: 50%;
+  z-index: 1;
+
+  @include mixins.respond-tablet {
+    position: fixed;
+    top: 10px;
+    height: 40%;
+    right: 15%;
+    z-index: 0;
+  }
 }
 
 .form__main {
@@ -16,7 +39,7 @@
   height: 100%;
   padding: 25px;
   box-sizing: border-box;
-  border-radius: 0;
+  border-radius: 24px 24px 0 0;
   background-color: #000000b3;
   backdrop-filter: blur(5px);
 }

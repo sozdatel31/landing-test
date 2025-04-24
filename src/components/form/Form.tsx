@@ -3,6 +3,7 @@ import { isValidPhoneNumber } from 'react-phone-number-input';
 import { Phone } from './Phone';
 import { Password } from './Password';
 import styles from './Form.module.scss';
+import gold2 from '../../assets/gold-2.png';
 interface FormValues {
   phone: string | undefined;
   password: string;
@@ -82,6 +83,8 @@ const Form = () => {
 
   return (
     <form className={styles.form__container} onSubmit={handleSubmit}>
+      <img className={styles.gold2} src={gold2} alt={'gold2'} />
+
       <div className={styles.form__main}>
         <p className={styles.form__title}>Регистрация</p>
         <div className={styles.form__input_list}>

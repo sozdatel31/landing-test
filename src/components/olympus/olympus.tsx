@@ -1,4 +1,4 @@
-import olympus from '../assets/olympus.png';
+import olympus from '../../assets/olympus.png';
 import styles from './olympus.module.scss';
 export function Olympus() {
   return (

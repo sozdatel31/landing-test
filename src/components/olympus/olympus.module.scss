@@ -1,0 +1,18 @@
+@use '../../styles/mixins';
+
+.Olympus {
+  &_image {
+    position: absolute;
+    height: 80%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include mixins.respond-tablet {
+      height: 100%;
+      top: 0;
+      left: 24px;
+      transform: none;
+    }
+  }
+}
